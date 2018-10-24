@@ -1,3 +1,5 @@
+const ENV = process.env.NODE_ENV;
+
 import express from 'express';
 import path from 'path';
 import favicon from 'serve-favicon';
@@ -31,13 +33,19 @@ getModels().then((models) => {
     app.use(express.static(path.join(__dirname, "../client/build")));
     app.use(morgan('dev'));
 
-    app.get('/', function (req, res) {
-      console.log("here");
-      console.log(path.join(__dirname, "../client/build", "index.html"));
-      res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-    });
-
     app.use('/api', api);
+
+    console.log(ENV);
+
+    if (ENV == 'development') {
+      app.get('*', function (req, res) {
+        res.status(301).redirect("http://localhost:3000")
+      });
+    } else {
+      app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+      });
+    }
 
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {

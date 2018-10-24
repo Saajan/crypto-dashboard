@@ -21,6 +21,7 @@
     "redux-saga": "^0.16.2",
     "styled-components": "^4.0.2"
   },
+  "proxy": "http://localhost:8080/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -21,7 +21,13 @@ export default function (sequelize, DataTypes) {
         after: {
             type: DataTypes.REAL,
         },
+    },{
+        paranoid: true
     });
+
+    Transaction.associate = (models) => {
+        Transaction.belongsTo(models.user);
+    }
 
     return Transaction;
 }

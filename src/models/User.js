@@ -47,6 +47,9 @@ export default function (sequelize, DataTypes) {
                 },
             },
         },
+    },{
+        paranoid: true
     });
+    
     return User;
 }

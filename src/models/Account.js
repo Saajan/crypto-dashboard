@@ -27,5 +27,14 @@ export default function (sequelize, DataTypes) {
     },{
         timestamps: false,
     });
+
+    Account.associate = (models) => {
+        Account.belongsTo(models.user);
+
+        Account.hasMany(models.transaction);
+    }
+
+
+
     return Account;
 }

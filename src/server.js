@@ -3,7 +3,6 @@ import path from 'path';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import cors from 'cors';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -21,17 +20,6 @@ getModels().then((models) => {
     console.log('Nice! Database looks fine');
 
     var app = express();
-
-    // view engine setup
-    app.set('views', path.join(__dirname, 'views'));
-    app.set('view engine', 'jade');
-
-    app.use(function (req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      next();
-    });
-
     // uncomment after placing your favicon in /public
     //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
     app.use(logger('dev'));
@@ -40,11 +28,13 @@ getModels().then((models) => {
       extended: false
     }));
     app.use(cookieParser());
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, "../client/build")));
     app.use(morgan('dev'));
 
     app.get('/', function (req, res) {
-      res.send('Crypto Dashboard API Server.');
+      console.log("here");
+      console.log(path.join(__dirname, "../client/build", "index.html"));
+      res.sendFile(path.join(__dirname, "../client/build", "index.html"));
     });
 
     app.use('/api', api);
@@ -70,7 +60,7 @@ getModels().then((models) => {
     });
 
     const port = 8080;
-    
+
 
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 

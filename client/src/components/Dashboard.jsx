@@ -41,12 +41,21 @@ class Dashboard extends Component {
                 <Header />
                 <Sidebar />
                 <Switch>
-                    <Route path="/dashboard/home" component={() => <Main {...this.props} />} />
-                    <Route path="/dashboard/trade" component={Trade} />
+                    <Route path="/trade" component={Trade} />
+                    <Route exact path="/" component={() => <Main {...this.props} />} />
+                    <Route component={NoMatch} />
                 </Switch>
                 <Footer />
             </DashboardWrapper>)
     };
 }
+
+const NoMatch = ({ location }) => (
+  <div>
+    <h3>
+      No match for <code>{location.pathname}</code>
+    </h3>
+  </div>
+);
 
 export default Dashboard;

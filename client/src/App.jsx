@@ -40,7 +40,6 @@ class App extends Component {
             <Switch>
               <Route path="/register" component={props => <Register {...props} />} />
               <Route path="/login" component={props => <Login {...props} />} />
-              <PrivateRoute path="/dashboard/:menu" component={props => <Dashboard {...props} />} />
               <PrivateRoute path="/" component={props => <Dashboard {...props} />} />
             </Switch>
           </div>

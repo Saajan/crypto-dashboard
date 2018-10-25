@@ -8,12 +8,12 @@ export default () => (
     <Navbar>
         <Menu>
             <MenuItem>
-                <Link to={{ pathname: `/dashboard/home` }} >
+                <Link to={{ pathname: `/` }} >
                     <MenuLink>Home</MenuLink>
                 </Link>
             </MenuItem>
             <MenuItem>
-                <Link to={{ pathname: `/dashboard/trade` }} >
+                <Link to={{ pathname: `/trade` }} >
                     <MenuLink>Trade</MenuLink>
                 </Link>
             </MenuItem>

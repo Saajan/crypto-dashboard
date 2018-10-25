@@ -20,7 +20,7 @@ const MainComponent = (props) => {
                     </CardWrapper>
                 </div>
                 <div>
-                    <h4>Current Coin Price</h4>
+                    <h4>Current Coin Price in USD</h4>
                     <CardWrapper>
                         <CurrentCoinPrice currentCoinPrice={currentCoinPrice} />
                     </CardWrapper>

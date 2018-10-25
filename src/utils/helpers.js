@@ -22,4 +22,26 @@ export const eachApiCall = (coinPair) => {
     }).then(function (obj) {
         return obj.data;
     });
-}
+};
+
+export const getHistoricBTC = (coinPair, startTime, endTime) => {
+    return rp({
+        url: `https://api.pro.coinbase.com/products/${coinPair}/candles?start=${startTime}?stop=${endTime}?granularity=900`,
+        headers: {
+            'User-Agent': 'User Agent'
+        },
+        json: true
+    }).then(function (obj) {
+        console.log("obj",obj);
+        return {
+            success:true,
+            historicBTC : obj
+        };
+    }).catch(function (err) {
+        console.log("errr",err);
+        return {
+            success:false,
+            msg : 'Get Historic for BTC API failed'
+        };
+    });
+};

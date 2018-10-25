@@ -7,6 +7,7 @@ import getModels from '../models';
 
 import {
   getToken,
+  getHistoricBTC,
   eachApiCall
 } from '../utils/helpers';
 var User = require("../models/User");
@@ -193,7 +194,7 @@ router.post('/getCurrentPrice', async (req, res) => {
     return eachApiCall(p);
   });
 
-  Promise.all(promises).then(function (response) {
+  Promise.all(promises).then((response) => {
     res.json({
       currentCoinPrice: response,
       success: true
@@ -201,10 +202,17 @@ router.post('/getCurrentPrice', async (req, res) => {
   }).catch(() => {
     res.json({
       success: false,
-      msg: "Current Coin Price Api not working"
+      msg: "Current Coin Price API failed."
     });
   });
   //https: //api.coinbase.com/v2/prices/BTC-USD/buy
-})
+});
+
+router.post('/getHistoricBTC', async (req, res) => {
+
+  const response = await getHistoricBTC('BTC-USD', '2018-07-10T12:00:00', '2018-07-15&12:00:00');
+  res.json(response)
+
+});
 
 module.exports = router;

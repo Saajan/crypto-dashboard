@@ -17,7 +17,8 @@ export default (props) => {
                     <Title>{coin.base}</Title>
                     <Numbers>
                         <CountUp
-                            end={coin.amount}
+                            end={parseFloat(coin.amount)}
+                            decimals={2}
                         >
                         </CountUp>
                     </Numbers>

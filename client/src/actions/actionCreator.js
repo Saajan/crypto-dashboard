@@ -1,4 +1,4 @@
-import { REQUEST_LOGIN ,REQUEST_REGISTER ,REQUEST_ACCOUNT} from './actionTypes'
+import { REQUEST_LOGIN ,REQUEST_REGISTER ,REQUEST_ACCOUNT ,REQUEST_COIN_CURRENT_PRICE} from './actionTypes'
 
 export const requestLogin = payload => ({
     type: REQUEST_LOGIN,
@@ -16,4 +16,12 @@ export const requestLogin = payload => ({
     type: REQUEST_ACCOUNT,
     payload,
   });
+
+  export const requestCurrentCoinPrice = payload => ({
+    type: REQUEST_COIN_CURRENT_PRICE,
+    payload,
+  });
+
+
+  
 

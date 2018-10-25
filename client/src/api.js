@@ -75,7 +75,7 @@ export const account = async (payload) => {
     }
 };
 
-export const coinCurrentPrice = async (payload) => {
+export const currentCoinPrice = async (payload) => {
     try {
         //console.log(payload);
         const response = await fetch(`/api/getCurrentPrice`, {

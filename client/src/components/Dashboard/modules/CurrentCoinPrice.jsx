@@ -3,22 +3,21 @@ import CountUp from 'react-countup';
 import { Card, Title, Numbers } from '../../../styles/dashboard'
 
 export default (props) => {
-    const { account } = props;
+    const { currentCoinPrice } = props;
 
-    if (account.length === 0) {
+    if (currentCoinPrice.length === 0) {
         return false
     };
 
     return (
         <>
-            {account.map((coin) => {
+            {currentCoinPrice.map((coin) => {
                 console.log(coin);
-                return (<Card key={coin.key}>
-                    <Title>{coin.key}</Title>
+                return (<Card key={`currentcoin${coin.base}`}>
+                    <Title>{coin.base}</Title>
                     <Numbers>
                         <CountUp
-                            end={coin.value}
-                            decimals={18}
+                            end={coin.amount}
                         >
                         </CountUp>
                     </Numbers>
@@ -26,4 +25,4 @@ export default (props) => {
             })}
         </>
     )
-}
+};

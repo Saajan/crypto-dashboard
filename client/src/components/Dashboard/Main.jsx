@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import NumberCard from './modules/NumberCard'
+import NumberCard from './modules/NumberCard';
+import CurrentCoinPrice from './modules/CurrentCoinPrice';
 
-import { Main, CardWrapper, MainWrapper, Title, Numbers } from '../../styles/dashboard'
+import { Main, CardWrapper, MainWrapper } from '../../styles/dashboard'
 
 const MainComponent = (props) => {
     console.log("final", props);
 
-    const { account: { accountUser: { account } } } = props;
+    const { account: { account } , currentCoinPrice: { currentCoinPrice } } = props;
 
-    console.log(account);
     return (
         <Main>
             <h2>Dashboard</h2>
@@ -17,6 +17,12 @@ const MainComponent = (props) => {
                     <h4>Balance</h4>
                     <CardWrapper>
                         <NumberCard account={account} />
+                    </CardWrapper>
+                </div>
+                <div>
+                    <h4>Current Coin Price</h4>
+                    <CardWrapper>
+                        <CurrentCoinPrice currentCoinPrice={currentCoinPrice} />
                     </CardWrapper>
                 </div>
             </MainWrapper>

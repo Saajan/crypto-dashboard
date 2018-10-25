@@ -157,7 +157,7 @@ router.post('/getAccount', async (req, res) => {
       raw: true,
     });
 
-    console.log("account",account);
+    console.log("account", account);
 
     if (account) {
       return {
@@ -187,14 +187,22 @@ router.post('/getAccount', async (req, res) => {
 
 router.post('/getCurrentPrice', async (req, res) => {
 
-  let currencyList = ['BTC-USD', 'LTC-USD', 'ETC-USD', 'ETH-USD', 'BCH-USD'];
+  let currencyList = ['BTC-USD', 'ETH-USD', 'BCH-USD', 'ETC-USD', 'LTC-USD'];
 
   const promises = await currencyList.map((p) => {
     return eachApiCall(p);
   });
 
   Promise.all(promises).then(function (response) {
-    res.json(response);
+    res.json({
+      currentCoinPrice: response,
+      success: true
+    });
+  }).catch(() => {
+    res.json({
+      success: false,
+      msg: "Current Coin Price Api not working"
+    });
   });
   //https: //api.coinbase.com/v2/prices/BTC-USD/buy
 })

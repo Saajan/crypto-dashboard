@@ -1,25 +1,25 @@
 import {
-    REQUEST_ACCOUNT_SUCCESS,
-    REQUEST_ACCOUNT_FAILURE
+    REQUEST_COIN_CURRENT_PRICE_SUCCESS,
+    REQUEST_COIN_CURRENT_PRICE_FAILURE
 } from '../actions/actionTypes';
 
 const initialState = {
-    account: [],
+    currentCoinPrice: [],
     error: null
 };
 
-export const accountReducer = (state = initialState, {
+export const currentCoinPriceReducer = (state = initialState, {
     type,
     payload
 }) => {
     switch (type) {
-        case REQUEST_ACCOUNT_SUCCESS:
+        case REQUEST_COIN_CURRENT_PRICE_SUCCESS:
             {
                 return { ...state,
-                    account: payload.account,
+                    currentCoinPrice: payload.currentCoinPrice,
                 };
             }
-        case REQUEST_ACCOUNT_FAILURE:
+        case REQUEST_COIN_CURRENT_PRICE_FAILURE:
             {
                 return { ...state,
                     error: payload

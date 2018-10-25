@@ -10,7 +10,9 @@ import {
 import {
     registerReducer
 } from './registerReducer';
-
+import {
+    currentCoinPriceReducer
+} from './currentCoinPriceReducer';
 import {
     accountReducer
 } from './accountReducer';
@@ -19,7 +21,8 @@ const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     router: routerReducer,
-    account: accountReducer
+    account: accountReducer,
+    currentCoinPrice: currentCoinPriceReducer
 });
 
 

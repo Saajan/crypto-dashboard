@@ -1,6 +1,5 @@
 import {
     call,
-    all,
     put,
     takeLatest
 } from 'redux-saga/effects';
@@ -15,12 +14,15 @@ import {
     REQUEST_ACCOUNT,
     REQUEST_ACCOUNT_SUCCESS,
     REQUEST_ACCOUNT_FAILURE,
+    REQUEST_COIN_CURRENT_PRICE,
+    REQUEST_COIN_CURRENT_PRICE_SUCCESS,
+    REQUEST_COIN_CURRENT_PRICE_FAILURE,
 } from '../actions/actionTypes';
 import {
     login,
     register,
     account,
-    coinCurrentPrice
+    currentCoinPrice
 } from '../api';
 
 
@@ -123,21 +125,12 @@ function* getAccountSaga({
     }
 }) {
 
-    //console.log("accounts", fields);
+    const accountUser = yield call(account, fields);
 
-    const [accountResponse, coinResponse] = yield all([
-        yield call(account, fields),
-        yield call(coinCurrentPrice, fields)
-    ])
-
-    const response = {
-        accountUser: accountResponse,
-        coinCurrentPrice: coinResponse
-    };
     try {
         yield put({
             type: REQUEST_ACCOUNT_SUCCESS,
-            payload: response
+            payload: accountUser
         })
     } catch (error) {
         yield put({
@@ -147,8 +140,28 @@ function* getAccountSaga({
     }
 }
 
+function* getCurrentCoinPriceSaga() {
+
+    const currentCoinPriceResponse = yield call(currentCoinPrice);
+
+    console.log("coindata",currentCoinPriceResponse);
+
+    try {
+        yield put({
+            type: REQUEST_COIN_CURRENT_PRICE_SUCCESS,
+            payload: currentCoinPriceResponse
+        })
+    } catch (error) {
+        yield put({
+            type: REQUEST_COIN_CURRENT_PRICE_FAILURE,
+            error
+        })
+    }
+}
+
 export default function* mySaga() {
     yield takeLatest(REQUEST_LOGIN, loginSaga);
     yield takeLatest(REQUEST_REGISTER, registerSaga);
     yield takeLatest(REQUEST_ACCOUNT, getAccountSaga);
+    yield takeLatest(REQUEST_COIN_CURRENT_PRICE, getCurrentCoinPriceSaga);
 }

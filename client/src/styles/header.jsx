@@ -22,8 +22,9 @@ export const User = styled.h3`
 
 export const Logo = styled.div`
     display: flex;
-    flex: 0 0 250px;
+    flex: 0 0 150px;
     height: 70px;
+    padding: 20px;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -40,4 +41,5 @@ export const Toolbar = styled.div`
     align-items: center;
     padding: 0 2rem;
 `;
+
 

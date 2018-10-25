@@ -153,13 +153,19 @@ router.post('/getAccount', async (req, res) => {
       where: {
         userid
       },
+      attributes: ['BTC', 'ETH', 'BCH', 'ETC', 'LTC'],
       raw: true,
     });
+
+    console.log("account",account);
 
     if (account) {
       return {
         success: true,
-        account
+        account: Object.entries(account).map(([key, value]) => ({
+          key,
+          value
+        }))
       }
     } else {
       return {

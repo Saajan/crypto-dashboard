@@ -4,15 +4,9 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-    coinCurrentPrice:{},
-    accountUser:{
-        account:{
-            BTC:0,
-            ETH:0,
-            ETC:0,
-            BCH:0,
-            LTC:0
-        }
+    coinCurrentPrice: {},
+    accountUser: {
+        account: {}
     },
     error: null
 };
@@ -26,7 +20,7 @@ export const accountReducer = (state = initialState, {
             {
                 return { ...state,
                     accountUser: payload.accountUser,
-                    coinCurrentPrice:payload.coinCurrentPrice
+                    coinCurrentPrice: payload.coinCurrentPrice
                 };
             }
         case REQUEST_ACCOUNT_FAILURE:

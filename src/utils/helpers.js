@@ -24,18 +24,18 @@ export const eachApiCall = (coinPair) => {
     });
 };
 
-export const getHistoricBTC = (coinPair, startTime, endTime) => {
+export const getBTCHistoric= (coinPair, startTime, endTime) => {
     return rp({
-        url: `https://api.pro.coinbase.com/products/${coinPair}/candles?start=${startTime}?stop=${endTime}?granularity=900`,
+        //url: `https://api.pro.coinbase.com/products/${coinPair}/candles?start=${startTime}?stop=${endTime}?granularity=86400`,
+        url: `https://api.pro.coinbase.com/products/${coinPair}/candles?granularity=86400`,
         headers: {
             'User-Agent': 'User Agent'
         },
         json: true
     }).then(function (obj) {
-        console.log("obj",obj);
         return {
             success:true,
-            historicBTC : obj
+            BTCHistoric : obj
         };
     }).catch(function (err) {
         console.log("errr",err);

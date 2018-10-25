@@ -2,13 +2,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Dashboard from '../components/Dashboard';
-import { requestAccountData,requestCurrentCoinPrice } from '../actions/actionCreator';
+import { requestAccountData,requestCurrentCoinPrice,requestBTCHistoricData } from '../actions/actionCreator';
 
 const mapStateToProps = state => {
     return ({
         login: state.login,
         account: state.account,
         currentCoinPrice: state.currentCoinPrice,
+        BTCHistoric:state.BTCHistoric,
     })
 };
 
@@ -17,6 +18,8 @@ const mapDispatchToProps = dispatch =>
         {
             requestAccountData,
             requestCurrentCoinPrice,
+            requestBTCHistoricData,
+
         },
         dispatch,
     );

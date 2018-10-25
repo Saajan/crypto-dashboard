@@ -16,13 +16,17 @@ import {
 import {
     accountReducer
 } from './accountReducer';
+import {
+    BTCHistoricReducer
+} from './BTCHistoricReducer';
 
 const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     router: routerReducer,
     account: accountReducer,
-    currentCoinPrice: currentCoinPriceReducer
+    currentCoinPrice: currentCoinPriceReducer,
+    BTCHistoric:BTCHistoricReducer
 });
 
 

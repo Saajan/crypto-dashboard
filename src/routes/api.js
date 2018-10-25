@@ -7,7 +7,7 @@ import getModels from '../models';
 
 import {
   getToken,
-  getHistoricBTC,
+  getBTCHistoric,
   eachApiCall
 } from '../utils/helpers';
 var User = require("../models/User");
@@ -210,7 +210,7 @@ router.post('/getCurrentPrice', async (req, res) => {
 
 router.post('/getHistoricBTC', async (req, res) => {
 
-  const response = await getHistoricBTC('BTC-USD', '2018-07-10T12:00:00', '2018-07-15&12:00:00');
+  const response = await getBTCHistoric('BTC-USD', '2017-10-26T12:00:00', '2018-10-26&12:00:00');
   res.json(response)
 
 });

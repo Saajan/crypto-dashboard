@@ -17,7 +17,7 @@ export const MainWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 120px 120px 1fr;
     grid-gap: 2em;
 `;
 
@@ -46,6 +46,10 @@ export const CardWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 2em;
+`;
+
+export const CardWrapperFull = styled(CardWrapper)`
+    grid-template-columns: 1fr;
 `;
 
 export const Title = styled.h3``;

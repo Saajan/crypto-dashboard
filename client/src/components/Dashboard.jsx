@@ -16,12 +16,13 @@ class Dashboard extends Component {
 
     componentWillMount() {
 
-        const { requestAccountData,requestCurrentCoinPrice, history } = this.props;
+        const { requestAccountData,requestCurrentCoinPrice,requestBTCHistoricData, history } = this.props;
 
         const token = localStorage.getItem('token');
         let decoded = decode(token);
         if (decoded) {
             requestCurrentCoinPrice();
+            requestBTCHistoricData();
             let userid = decoded.id;
             let encodedKey = encodeURIComponent('userid');
             let encodedValue = encodeURIComponent(userid);

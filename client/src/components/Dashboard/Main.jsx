@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import NumberCard from './modules/NumberCard';
 import CurrentCoinPrice from './modules/CurrentCoinPrice';
+import TimeseriesHistoric from './modules/TimeseriesHistoric';
 
-import { Main, CardWrapper, MainWrapper } from '../../styles/dashboard'
+import { Main, CardWrapper,CardWrapperFull, MainWrapper } from '../../styles/dashboard'
 
 const MainComponent = (props) => {
     console.log("final", props);
 
-    const { account: { account } , currentCoinPrice: { currentCoinPrice } } = props;
+    const { account: { account }, currentCoinPrice: { currentCoinPrice }, BTCHistoric: { BTCHistoric } } = props;
 
     return (
         <Main>
@@ -24,6 +25,12 @@ const MainComponent = (props) => {
                     <CardWrapper>
                         <CurrentCoinPrice currentCoinPrice={currentCoinPrice} />
                     </CardWrapper>
+                </div>
+                <div>
+                    <h4>BTC Historic data in USD</h4>
+                    <CardWrapperFull>
+                        <TimeseriesHistoric BTCHistoric={BTCHistoric} />
+                    </CardWrapperFull>
                 </div>
             </MainWrapper>
         </Main>)

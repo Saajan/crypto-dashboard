@@ -17,12 +17,16 @@ import {
     REQUEST_COIN_CURRENT_PRICE,
     REQUEST_COIN_CURRENT_PRICE_SUCCESS,
     REQUEST_COIN_CURRENT_PRICE_FAILURE,
+    REQUEST_BTC_HISTORIC,
+    REQUEST_BTC_HISTORIC_SUCCESS,
+    REQUEST_BTC_HISTORIC_FAILURE
 } from '../actions/actionTypes';
 import {
     login,
     register,
     account,
-    currentCoinPrice
+    currentCoinPrice,
+    BTCHistoricSaga
 } from '../api';
 
 
@@ -159,9 +163,26 @@ function* getCurrentCoinPriceSaga() {
     }
 }
 
+function* getBTCHistoricSaga() {
+
+    const BTCHistoricResponse = yield call(BTCHistoricSaga);
+    try {
+        yield put({
+            type: REQUEST_BTC_HISTORIC_SUCCESS,
+            payload: BTCHistoricResponse
+        })
+    } catch (error) {
+        yield put({
+            type: REQUEST_BTC_HISTORIC_FAILURE,
+            error
+        })
+    }
+}
+
 export default function* mySaga() {
     yield takeLatest(REQUEST_LOGIN, loginSaga);
     yield takeLatest(REQUEST_REGISTER, registerSaga);
     yield takeLatest(REQUEST_ACCOUNT, getAccountSaga);
     yield takeLatest(REQUEST_COIN_CURRENT_PRICE, getCurrentCoinPriceSaga);
+    yield takeLatest(REQUEST_BTC_HISTORIC, getBTCHistoricSaga);
 }

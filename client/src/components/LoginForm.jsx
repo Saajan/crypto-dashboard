@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button, Row, Col, notification } from 'antd';
 import { Link, } from 'react-router-dom';
 
 import { FormWrapper, SmallFormContainer, Center, Logo } from '../styles/form';
-import {getEncodedData} from '../utils/helpers';
+import { getEncodedData } from '../utils/helpers';
 
 const FormItem = Form.Item;
 
@@ -11,6 +11,14 @@ class LoginForm extends Component {
     constructor(props, context) {
         super(props, context);
     }
+
+    componentWillMount() {
+        const { history } = this.props;
+        const token = localStorage.getItem('token');
+        if (token) {
+            history.push('/');
+        }
+    };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.login.error) {
@@ -35,7 +43,7 @@ class LoginForm extends Component {
                 requestLogin({
                     fields: formBody,
                     callback: () => {
-                        history.push('/dashboard/home');
+                        history.push('/');
                     },
                 });
             };

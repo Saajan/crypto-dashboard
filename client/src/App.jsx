@@ -40,6 +40,7 @@ class App extends Component {
             <Switch>
               <Route path="/register" component={props => <Register {...props} />} />
               <Route path="/login" component={props => <Login {...props} />} />
+              <Route path="/logout" component={Logout} />
               <PrivateRoute path="/" component={props => <Dashboard {...props} />} />
             </Switch>
           </div>
@@ -48,5 +49,14 @@ class App extends Component {
     );
   }
 }
+
+const Logout = () => {
+
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+
+  return <Redirect to='/login' />
+};
+
 
 export default App;

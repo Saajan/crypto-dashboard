@@ -13,6 +13,14 @@ class RegisterForm extends Component {
         super(props, context);
     }
 
+    componentWillMount() {
+        const { history } = this.props;
+        const token = localStorage.getItem('token');
+        if (token) {
+            history.push('/');
+        } 
+    };
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.register.error) {
             notification['error']({

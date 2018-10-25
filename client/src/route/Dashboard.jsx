@@ -5,9 +5,6 @@ import Dashboard from '../components/Dashboard';
 import { requestAccountData } from '../actions/actionCreator';
 
 const mapStateToProps = state => {
-
-    console.log(state);
-
     return ({
         login: state.login,
         account: state.account,

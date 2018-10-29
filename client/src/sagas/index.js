@@ -19,14 +19,18 @@ import {
     REQUEST_COIN_CURRENT_PRICE_FAILURE,
     REQUEST_BTC_HISTORIC,
     REQUEST_BTC_HISTORIC_SUCCESS,
-    REQUEST_BTC_HISTORIC_FAILURE
+    REQUEST_BTC_HISTORIC_FAILURE,
+    REQUEST_TRANSACTION,
+    REQUEST_TRANSACTION_SUCCESS,
+    REQUEST_TRANSACTION_FAILURE,
 } from '../actions/actionTypes';
 import {
     login,
     register,
     account,
     currentCoinPrice,
-    BTCHistoricSaga
+    BTCHistoric,
+    transaction
 } from '../api';
 
 
@@ -128,9 +132,7 @@ function* getAccountSaga({
         fields
     }
 }) {
-
     const accountUser = yield call(account, fields);
-
     try {
         yield put({
             type: REQUEST_ACCOUNT_SUCCESS,
@@ -145,11 +147,8 @@ function* getAccountSaga({
 }
 
 function* getCurrentCoinPriceSaga() {
-
     const currentCoinPriceResponse = yield call(currentCoinPrice);
-
     console.log("coindata",currentCoinPriceResponse);
-
     try {
         yield put({
             type: REQUEST_COIN_CURRENT_PRICE_SUCCESS,
@@ -164,8 +163,7 @@ function* getCurrentCoinPriceSaga() {
 }
 
 function* getBTCHistoricSaga() {
-
-    const BTCHistoricResponse = yield call(BTCHistoricSaga);
+    const BTCHistoricResponse = yield call(BTCHistoric);
     try {
         yield put({
             type: REQUEST_BTC_HISTORIC_SUCCESS,
@@ -179,10 +177,31 @@ function* getBTCHistoricSaga() {
     }
 }
 
+function* getTransactionSaga({
+    payload: {
+        fields
+    }
+}) {
+    console.log("tranaction",fields);
+    const transactionResponse = yield call(transaction, fields);
+    try {
+        yield put({
+            type: REQUEST_TRANSACTION_SUCCESS,
+            payload: transactionResponse
+        })
+    } catch (error) {
+        yield put({
+            type: REQUEST_TRANSACTION_FAILURE,
+            error
+        })
+    }
+}
+
 export default function* mySaga() {
     yield takeLatest(REQUEST_LOGIN, loginSaga);
     yield takeLatest(REQUEST_REGISTER, registerSaga);
     yield takeLatest(REQUEST_ACCOUNT, getAccountSaga);
     yield takeLatest(REQUEST_COIN_CURRENT_PRICE, getCurrentCoinPriceSaga);
     yield takeLatest(REQUEST_BTC_HISTORIC, getBTCHistoricSaga);
+    yield takeLatest(REQUEST_TRANSACTION, getTransactionSaga);
 }

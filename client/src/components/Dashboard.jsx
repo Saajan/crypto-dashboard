@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
     componentWillMount() {
 
-        const { requestAccountData,requestCurrentCoinPrice,requestBTCHistoricData, history } = this.props;
+        const { requestAccountData, requestCurrentCoinPrice, requestBTCHistoricData, requestTransactionData, history } = this.props;
 
         const token = localStorage.getItem('token');
         let decoded = decode(token);
@@ -30,20 +30,23 @@ class Dashboard extends Component {
             requestAccountData({
                 fields: formBody,
             });
+            requestTransactionData({
+                fields: formBody,
+            });
         } else {
             history.push('/login');
         }
-        
+
     };
 
     render() {
-        console.log("account full render",this.props,this.state);
+        console.log("account full render", this.props, this.state);
         return (
             <DashboardWrapper>
                 <Header />
                 <Sidebar />
                 <Switch>
-                    <Route path="/trade" component={Trade} />
+                    <Route path="/trade" component={() => <Trade {...this.props} />} />
                     <Route exact path="/" component={() => <Main {...this.props} />} />
                     <Route component={NoMatch} />
                 </Switch>
@@ -53,11 +56,11 @@ class Dashboard extends Component {
 }
 
 const NoMatch = ({ location }) => (
-  <div>
-    <h3>
-      No match for <code>{location.pathname}</code>
-    </h3>
-  </div>
+    <div>
+        <h3>
+            No match for <code>{location.pathname}</code>
+        </h3>
+    </div>
 );
 
 export default Dashboard;

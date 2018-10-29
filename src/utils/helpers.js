@@ -1,5 +1,5 @@
 import rp from 'request-promise';
-
+import getModels from '../models';
 
 export const getToken = (headers) => {
     if (headers && headers.authorization) {
@@ -13,7 +13,6 @@ export const getToken = (headers) => {
         return null;
     }
 };
-
 
 export const eachApiCall = (coinPair) => {
     return rp({

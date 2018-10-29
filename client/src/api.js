@@ -11,9 +11,7 @@ export const login = async (payload) => {
         }).then((response)=>{
             return response.json();
         });
-
         console.log(response);
-
         return {
             ...response,
         };
@@ -100,7 +98,7 @@ export const currentCoinPrice = async (payload) => {
     }
 };
 
-export const BTCHistoricSaga = async (payload) => {
+export const BTCHistoric = async (payload) => {
     try {
         //console.log(payload);
         const response = await fetch(`/api/getHistoricBTC`, {
@@ -113,12 +111,35 @@ export const BTCHistoricSaga = async (payload) => {
             return response.json();
         });
         //console.log(response);
-
         return {
             ...response,
         };
     } catch (e) {
         console.log('catching in historic BTC api');
+        return {
+            isError: true,
+        };
+    }
+};
+
+export const transaction = async (payload) => {
+    try {
+        //console.log(payload);
+        const response = await fetch(`/api/getTransaction`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: payload,
+        }).then((response)=>{
+            return response.json();
+        });
+        console.log(response);
+        return {
+            ...response,
+        };
+    } catch (e) {
+        console.log('catching in tranaction api');
         return {
             isError: true,
         };

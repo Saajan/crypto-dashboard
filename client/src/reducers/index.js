@@ -19,6 +19,9 @@ import {
 import {
     BTCHistoricReducer
 } from './BTCHistoricReducer';
+import {
+    transactionReducer
+} from './transactionReducer';
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -26,7 +29,8 @@ const rootReducer = combineReducers({
     router: routerReducer,
     account: accountReducer,
     currentCoinPrice: currentCoinPriceReducer,
-    BTCHistoric:BTCHistoricReducer
+    BTCHistoric:BTCHistoricReducer,
+    transaction:transactionReducer
 });
 
 
